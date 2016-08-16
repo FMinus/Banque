@@ -5,3 +5,13 @@
 {
     margin-top: 20px;
 }
+
+.clickable
+{
+    cursor: pointer;
+}
+
+.error
+{
+    color: red;
+}

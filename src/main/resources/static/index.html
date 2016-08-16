@@ -33,12 +33,13 @@ and open the template in the editor.
                     <form>
                         <div class="form-group">
                             <label>code Compte</label>
-                            <input type="text" ng-model="codeCompte" />
+                            <input type="text" ng-model="codeCompte" id="codeCompte"/>
                             <button ng-click="chargerCompte()">Charger</button>
                         </div>
                         
-                        <div>{{test}}</div>
+                        
                     </form>
+                    <div ng-if="errorMessage!=null" class="container error">{{errorMessage}}</div>
                 </div>
             </div>
         </div>
@@ -78,16 +79,67 @@ and open the template in the editor.
                             <div class="form-group">
                                 <label>Versement</label>
                                 <input type="radio" ng-model="operation.type" value="versement"/>
+                                
                                 <label>Retrait</label>
-                                <input type="radio" ng-model="operation.type" value="retrait"/>    
+                                <input type="radio" ng-model="operation.type" value="retirer"/>    
+                                
+                                <label>Virement</label>
+                                <input type="radio" ng-model="operation.type" value="virement"/>    
                             </div>
                             <div class="form-group">
-                                <label>Montant : </label>
-                                <input type="text" ng-model="" />
+                                <span>
+                                    <label>Montant : </label>
+                                    <input type="text" ng-model="operation.montant" />
+                                </span>
+                            </div>   
+                            <div class="form-group">
+                                <span ng-if="operation.type=='virement'">
+                                    <label>Vers le Compte : </label>
+                                    <input type="text" ng-model="operation.codeCompteTo" />
+                                </span>
                             </div>
+                            <button ng-click="saveOperation()" class="btn btn-primary">Save</button>
                         </form>
+                        
                     </div>
                     
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="panel panel-info spacer">
+                    <div class="panel-heading">List Operations sur le Compte </div>
+                    <div class="panel-body">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Num</th>
+                                    <th>Date</th>
+                                    <th>Montant</th>
+                                    <th>Type</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="op in pageOperations.operations">
+                                    <td>{{op.numeroOperation}}</td>
+                                    <td>{{op.dateOperation|date:'dd-MM-yyyy'}}</td>
+                                    <td>{{op.montant}}</td>
+                                    <td>{{op.type}}</td>
+                                </tr>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    
+                    <div class="container spacer">
+                        <ul class="nav nav-pills">
+                            <li class ="clickable" ng-repeat="p in pages track by $index" ng-class="{active:$index==pageCourante}">
+                                <a ng-click="goToPage($index)">{{$index}}</a>
+                            </li>
+                        </ul>
+                        
+                    </div> 
                 </div>
             </div>
         </div>
@@ -96,5 +148,9 @@ and open the template in the editor.
         
         <!--         -->
         <script type="text/javascript" src="js/myScript.js" ></script>
+        <script>
+            //console.log("tes");
+            document.getElementById('codeCompte').value = 'CC1';
+        </script>
     </body>
 </html>
