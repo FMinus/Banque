@@ -31,12 +31,13 @@
 		</dependency>
                 
                 
-                
-		<dependency>
+                <!-- a commenter si on deplois en war : pas de server embedded -->
+		
+                <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
+                
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
